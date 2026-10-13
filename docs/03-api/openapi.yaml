@@ -1,0 +1,243 @@
+openapi: 3.0.3
+info:
+  title: Industrial Modernization Monitoring API
+  version: 1.0.0
+  description: Учебный контракт Модуля 2; реальные интеграции уточняются.
+servers:
+  - url: https://monitoring.example.test/api/v1
+security:
+  - bearerAuth: []
+paths:
+  /projects/import:
+    post:
+      summary: Импорт утверждённого проекта из Модуля 1
+      operationId: importProject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ProjectImport'}
+      responses:
+        '201': {description: Проект импортирован}
+        '400': {description: Ошибка валидации}
+        '409': {description: Конфликт внешнего ID или версии плана}
+  /sync/{sourceCode}:
+    post:
+      summary: Запустить синхронизацию источника
+      parameters:
+        - in: path
+          name: sourceCode
+          required: true
+          schema: {type: string}
+      responses:
+        '202': {description: Запуск поставлен в очередь}
+        '403': {description: Недостаточно прав}
+  /projects/{projectId}:
+    get:
+      summary: Получить карточку проекта
+      parameters:
+        - {$ref: '#/components/parameters/projectId'}
+      responses:
+        '200':
+          description: Карточка проекта
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Project'}
+        '403': {description: Недостаточно прав}
+        '404': {description: Не найдено}
+  /projects/{projectId}/status-proposals:
+    post:
+      summary: Создать предложение статуса; статус не меняется автоматически
+      parameters:
+        - {$ref: '#/components/parameters/projectId'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [proposedStatus, eventCode, reason]
+              properties:
+                proposedStatus: {type: string, enum: [ACTIVE, SUSPENDED, COMPLETED, TERMINATED_EARLY]}
+                eventCode: {type: string}
+                reason: {type: string}
+      responses:
+        '201': {description: Предложение создано}
+  /projects/{projectId}/status-proposals/{proposalId}/confirm:
+    post:
+      summary: Подтвердить или отклонить предложение статуса
+      parameters:
+        - {$ref: '#/components/parameters/projectId'}
+        - in: path
+          name: proposalId
+          required: true
+          schema: {type: string, format: uuid}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [decision]
+              properties:
+                decision: {type: string, enum: [CONFIRM, REJECT]}
+                reason: {type: string}
+                comment: {type: string}
+                documentId: {type: string, format: uuid}
+      responses:
+        '200': {description: Решение записано}
+        '400': {description: Для приостановки/прекращения не хватает обязательных полей}
+  /projects/{projectId}/deviations:
+    get:
+      summary: Список отклонений проекта
+      parameters:
+        - {$ref: '#/components/parameters/projectId'}
+      responses:
+        '200':
+          description: Список отклонений
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/Deviation'}
+    post:
+      summary: Зарегистрировать отклонение
+      parameters:
+        - {$ref: '#/components/parameters/projectId'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/DeviationCreate'}
+      responses:
+        '201': {description: Отклонение создано}
+  /deviations/{deviationId}/comments:
+    post:
+      summary: Добавить комментарий или пояснение
+      parameters:
+        - in: path
+          name: deviationId
+          required: true
+          schema: {type: string, format: uuid}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [comment]
+              properties:
+                comment: {type: string, minLength: 1}
+      responses:
+        '201': {description: Комментарий сохранён}
+  /deviations/{deviationId}/resolve:
+    post:
+      summary: Отметить отклонение устранённым
+      parameters:
+        - in: path
+          name: deviationId
+          required: true
+          schema: {type: string, format: uuid}
+      responses:
+        '200': {description: Ожидает проверки ведомством}
+  /deviations/{deviationId}/close:
+    post:
+      summary: Проверить и закрыть отклонение
+      parameters:
+        - in: path
+          name: deviationId
+          required: true
+          schema: {type: string, format: uuid}
+      responses:
+        '200': {description: Отклонение закрыто}
+        '403': {description: Недостаточно прав}
+  /reports/summary:
+    get:
+      summary: Сводка по доступным пользователю проектам
+      responses:
+        '200':
+          description: Сводка
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalProjects: {type: integer}
+                  openDeviations: {type: integer}
+                  staleSources: {type: integer}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    projectId:
+      in: path
+      name: projectId
+      required: true
+      schema: {type: string, format: uuid}
+  schemas:
+    ProjectImport:
+      type: object
+      required: [sourceCode, externalProjectId, name, enterpriseId, planVersion, planStatus, plannedStartDate, plannedEndDate, plannedBudget, currency]
+      properties:
+        sourceCode: {type: string}
+        externalProjectId: {type: string}
+        name: {type: string}
+        enterpriseId: {type: string}
+        departmentId: {type: string}
+        planVersion: {type: integer, minimum: 1}
+        planStatus: {type: string, enum: [DRAFT, APPROVED]}
+        plannedStartDate: {type: string, format: date}
+        plannedEndDate: {type: string, format: date}
+        plannedBudget: {type: number, minimum: 0}
+        currency: {type: string, minLength: 3, maxLength: 3}
+        stages:
+          type: array
+          items:
+            type: object
+            required: [externalStageId, name, plannedDurationDays]
+            properties:
+              externalStageId: {type: string}
+              name: {type: string}
+              plannedDurationDays: {type: integer, minimum: 1}
+        kpis:
+          type: array
+          items:
+            type: object
+            required: [code, name, unit, targetValue, direction, thresholdPercent]
+            properties:
+              code: {type: string}
+              name: {type: string}
+              unit: {type: string}
+              targetValue: {type: number}
+              direction: {type: string, enum: [HIGHER_IS_BETTER, LOWER_IS_BETTER]}
+              thresholdPercent: {type: number, minimum: 0}
+    Project:
+      type: object
+      properties:
+        projectId: {type: string, format: uuid}
+        name: {type: string}
+        enterpriseId: {type: string}
+        status: {type: string, enum: [ACTIVE, SUSPENDED, COMPLETED, TERMINATED_EARLY]}
+        currentPlanVersion: {type: integer}
+        lastSuccessfulSyncAt: {type: string, format: date-time}
+        dataStale: {type: boolean}
+    DeviationCreate:
+      type: object
+      required: [type, title, measuredValue, thresholdValue]
+      properties:
+        type: {type: string, enum: [SCHEDULE, BUDGET, KPI, DATA_QUALITY]}
+        title: {type: string}
+        measuredValue: {type: number}
+        thresholdValue: {type: number}
+        description: {type: string}
+    Deviation:
+      allOf:
+        - {$ref: '#/components/schemas/DeviationCreate'}
+        - type: object
+          properties:
+            deviationId: {type: string, format: uuid}
+            status: {type: string, enum: [OPEN, IN_PROGRESS, RESOLVED, CLOSED]}
+            detectedAt: {type: string, format: date-time}

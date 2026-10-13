@@ -1,0 +1,19 @@
+{
+  "sourceCode": "production-kpi-adapter",
+  "externalProjectId": "PRD-99018",
+  "sourceRecordId": "PRD-99018-2026-10-12",
+  "snapshotAt": "2026-10-12T03:00:00Z",
+  "kpis": [
+    {
+      "code": "output_volume",
+      "actualValue": 10200,
+      "unit": "units/year"
+    },
+    {
+      "code": "unit_cost",
+      "actualValue": 480,
+      "unit": "RUB/unit"
+    }
+  ],
+  "status": "SUCCESS"
+}

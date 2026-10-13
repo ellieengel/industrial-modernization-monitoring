@@ -1,0 +1,17 @@
+{
+  "sourceCode": "finance-adapter",
+  "externalProjectId": "FIN-77821",
+  "sourceRecordId": "FIN-77821-2026-10",
+  "snapshotAt": "2026-10-12T02:15:00Z",
+  "currency": "RUB",
+  "period": "2026-10",
+  "expenses": {
+    "planned": 10000000,
+    "actual": 11250000
+  },
+  "payments": {
+    "planned": 8500000,
+    "actual": 8100000
+  },
+  "status": "SUCCESS"
+}

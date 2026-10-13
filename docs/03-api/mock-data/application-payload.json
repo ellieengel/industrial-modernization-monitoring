@@ -1,0 +1,43 @@
+{
+  "sourceCode": "module1",
+  "externalProjectId": "M1-2026-0042",
+  "name": "Модернизация производственной линии",
+  "enterpriseId": "ENT-100",
+  "departmentId": "DEP-07",
+  "planVersion": 1,
+  "planStatus": "APPROVED",
+  "plannedStartDate": "2026-01-01",
+  "plannedEndDate": "2026-12-31",
+  "plannedBudget": 125000000,
+  "currency": "RUB",
+  "stages": [
+    {
+      "externalStageId": "ST-01",
+      "name": "Проектирование",
+      "plannedDurationDays": 60
+    },
+    {
+      "externalStageId": "ST-02",
+      "name": "Поставка оборудования",
+      "plannedDurationDays": 90
+    }
+  ],
+  "kpis": [
+    {
+      "code": "output_volume",
+      "name": "Объём выпуска",
+      "unit": "units/year",
+      "targetValue": 12000,
+      "direction": "HIGHER_IS_BETTER",
+      "thresholdPercent": 10
+    },
+    {
+      "code": "unit_cost",
+      "name": "Себестоимость единицы",
+      "unit": "RUB/unit",
+      "targetValue": 450,
+      "direction": "LOWER_IS_BETTER",
+      "thresholdPercent": 8
+    }
+  ]
+}
