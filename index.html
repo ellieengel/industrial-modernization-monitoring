@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111827">
+<title>ГИС «Господдержка» — единая презентация модулей 1–3</title>
+<style>
+:root{--bg:#0b1020;--panel:#121a2d;--panel2:#172238;--ink:#edf2ff;--muted:#a8b4cc;--line:#2a3852;--blue:#78a9ff;--cyan:#6ee7e1;--amber:#f7c873;--violet:#b9a2ff;--green:#83dfb0;--max:1160px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:86px}body{margin:0;background:radial-gradient(ellipse at 75% 0%,#182746 0,transparent 42%),var(--bg);color:var(--ink);font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit}.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}.top{position:sticky;top:0;z-index:10;background:#0b1020eF;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:68px}.brand{font-size:.82rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.brand span{color:var(--cyan)}.navlinks{display:flex;gap:8px;flex-wrap:wrap}.navlinks a{text-decoration:none;color:var(--muted);padding:7px 11px;border-radius:9px;font-size:.88rem}.navlinks a:hover{background:var(--panel2);color:var(--ink)}
+.hero{padding:88px 0 68px}.eyebrow{color:var(--cyan);font-size:.78rem;letter-spacing:.19em;text-transform:uppercase;font-weight:800}.hero h1{font-size:clamp(2.7rem,6vw,5.6rem);line-height:.99;letter-spacing:-.055em;max-width:930px;margin:20px 0}.hero h1 em{font-style:normal;color:var(--blue)}.lead{max-width:760px;color:var(--muted);font-size:1.18rem}.hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}.pill{border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:#d7e2f8;font-size:.82rem}.system-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:46px}.flow-card{border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,#18243a,#10182a);padding:20px;position:relative;min-height:145px}.flow-card:not(:last-child):after{content:"→";position:absolute;right:-18px;top:46%;z-index:2;color:var(--muted);font-size:1.4rem}.flow-card .num{font-size:.75rem;letter-spacing:.14em;color:var(--muted)}.flow-card h3{margin:10px 0 4px;font-size:1.12rem}.flow-card p{margin:0;color:var(--muted);font-size:.91rem}
+section{padding:72px 0;border-top:1px solid var(--line)}.section-head{display:grid;grid-template-columns:160px 1fr;gap:28px;align-items:start;margin-bottom:30px}.section-no{font-size:.78rem;letter-spacing:.17em;color:var(--muted);text-transform:uppercase;padding-top:9px}.section-head h2{font-size:clamp(2rem,4vw,3.25rem);line-height:1.08;letter-spacing:-.04em;margin:0 0 12px}.section-head p{color:var(--muted);margin:0;max-width:760px}.tag{display:inline-flex;border-radius:7px;padding:4px 8px;font-size:.75rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:#21314a;color:var(--blue)}.m1 .tag{color:var(--blue)}.m2 .tag{color:var(--amber)}.m3 .tag{color:var(--violet)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{border:1px solid var(--line);background:linear-gradient(145deg,var(--panel),#0e1627);border-radius:16px;padding:22px}.card h3{font-size:1.06rem;margin:9px 0}.card p,.card li{color:var(--muted);font-size:.94rem}.card p{margin:0}.card ul{margin:10px 0 0;padding-left:19px}.icon{width:36px;height:36px;display:grid;place-items:center;border-radius:10px;background:#233450;color:var(--cyan);font-weight:900}.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}.metric{border:1px solid var(--line);padding:20px;border-radius:15px;background:#111a2b}.metric strong{display:block;font-size:clamp(1.8rem,3vw,2.8rem);letter-spacing:-.04em;line-height:1.1}.metric span{display:block;color:var(--muted);font-size:.88rem;margin-top:9px}.note{border-left:3px solid var(--amber);padding:13px 17px;background:#1a1d28;color:#d5d8e3;border-radius:0 10px 10px 0;font-size:.9rem;margin:22px 0}.note.blue{border-color:var(--blue)}.note.violet{border-color:var(--violet)}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:22px 0}.step{padding:16px 14px;border:1px solid var(--line);border-radius:13px;background:var(--panel)}.step b{display:block;font-size:.78rem;color:var(--cyan);letter-spacing:.08em}.step strong{display:block;margin:7px 0}.step small{display:block;color:var(--muted);line-height:1.45}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}.list-card{border:1px solid var(--line);border-radius:15px;padding:22px;background:var(--panel)}.list-card h3{margin:0 0 12px}.list-card ul{padding-left:20px;margin:0}.list-card li{color:var(--muted);margin:6px 0}
+.api-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.api{font: .82rem ui-monospace,SFMono-Regular,Consolas,monospace;background:#0a1120;border:1px solid var(--line);padding:7px 9px;border-radius:8px;color:#d9e6ff;overflow-wrap:anywhere}
+footer{padding:38px 0 56px;color:var(--muted);font-size:.86rem}.footer-line{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:20px}.small{font-size:.84rem;color:var(--muted)}.accent-blue{color:var(--blue)}.accent-amber{color:var(--amber)}.accent-violet{color:var(--violet)}
+@media(max-width:800px){.nav{align-items:flex-start;padding:14px 0;flex-direction:column}.navlinks{gap:3px}.hero{padding:60px 0 48px}.system-flow,.grid,.metric-grid{grid-template-columns:1fr}.flow-card:not(:last-child):after{content:"↓";right:20px;top:auto;bottom:-22px}.section-head{grid-template-columns:1fr;gap:6px}.steps{grid-template-columns:1fr 1fr}.split{grid-template-columns:1fr}.wrap{width:min(var(--max),calc(100% - 28px))}}
+@media(max-width:440px){.steps{grid-template-columns:1fr}.navlinks a{padding:6px 8px;font-size:.8rem}}
+@media print{body{background:white;color:#111}.top{position:static;background:white}.card,.flow-card,.metric,.step,.list-card{background:white;color:#111;border-color:#bbb}.card p,.card li,.flow-card p,.metric span,.step small,.section-head p,.lead,.small{color:#444}section{break-inside:avoid}.hero{padding:35px 0}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap nav">
+    <div class="brand">ГИС <span>«Господдержка»</span></div>
+    <nav class="navlinks" aria-label="Навигация по разделам">
+      <a href="#overview">Экосистема</a><a href="#module1">Модуль 1</a><a href="#module2">Модуль 2</a><a href="#module3">Модуль 3</a><a href="#quality">Качество</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap hero" id="overview">
+    <div class="eyebrow">Системный анализ · единая презентация</div>
+    <h1>От заявки<br>до <em>контроля результата</em></h1>
+    <p class="lead">Три взаимосвязанных модуля ГИС «Господдержка» формируют сквозной цикл государственной поддержки промышленных предприятий: от первичной проверки заявки до мониторинга реализации проекта и проверки отчётности.</p>
+    <div class="hero-meta"><span class="pill">Requirements Engineering</span><span class="pill">REST API · OpenAPI</span><span class="pill">PostgreSQL · модель данных</span><span class="pill">Docs-as-Code</span></div>
+    <div class="system-flow" aria-label="Связь модулей">
+      <article class="flow-card"><div class="num">01 / ВХОД В СИСТЕМУ</div><h3 class="accent-blue">Приём и рассмотрение</h3><p>Заявка, документы, проверки, скоринг и решение оператора.</p></article>
+      <article class="flow-card"><div class="num">02 / ИСПОЛНЕНИЕ</div><h3 class="accent-amber">Мониторинг проекта</h3><p>Фактические данные, сроки, бюджет, KPI и обработка отклонений.</p></article>
+      <article class="flow-card"><div class="num">03 / ОТЧЁТНОСТЬ</div><h3 class="accent-violet">Проверка отчётности</h3><p>Пакет документов, УКЭП, автоматическая валидация и решение инспектора.</p></article>
+    </div>
+  </div>
+
+  <section class="m1" id="module1">
+    <div class="wrap">
+      <div class="section-head"><div class="section-no">Модуль / 01</div><div><span class="tag">Точка входа</span><h2>Приём, проверка и рассмотрение заявок</h2><p>Модуль 1 задаёт исходную точку процесса: собирает данные о предприятии и проекте, запускает проверки, организует рассмотрение и фиксирует окончательное решение.</p></div></div>
+      <div class="metric-grid">
+        <div class="metric"><strong class="accent-blue">14 дней → 2 ч</strong><span>Целевой срок обработки заявки</span></div>
+        <div class="metric"><strong class="accent-blue">70%</strong><span>Цель автозаполнения полей по ИНН</span></div>
+        <div class="metric"><strong class="accent-blue">p95 &lt; 1,5 с</strong><span>Целевое время ответа синхронного API</span></div>
+      </div>
+      <div class="note blue">Показатели приведены как проектные цели из документации Модуля 1. Они не подтверждены промышленным внедрением или нагрузочными испытаниями.</div>
+      <div class="grid">
+        <article class="card"><div class="icon">01</div><h3>Данные и документы</h3><p>Заявитель указывает ИНН, получает доступные сведения о предприятии, заполняет форму проекта и прикрепляет необходимые документы.</p></article>
+        <article class="card"><div class="icon">02</div><h3>Автоматические проверки</h3><p>Проверяются обязательные поля, сумма заявки, отраслевые условия и доступные сведения внешних источников. Технический сбой не приравнивается к отрицательному результату.</p></article>
+        <article class="card"><div class="icon">03</div><h3>Рассмотрение и решение</h3><p>Результаты проверок и скоринга формируют маршрут. Оператор рассматривает материалы и фиксирует решение с основанием и историей изменений.</p></article>
+      </div>
+      <h3 style="margin-top:32px">Сквозной жизненный цикл заявки</h3>
+      <div class="steps">
+        <div class="step"><b>01</b><strong>Черновик</strong><small>Данные предприятия, параметры проекта, документы.</small></div>
+        <div class="step"><b>02</b><strong>Отправка</strong><small>Валидация формы и регистрация заявки.</small></div>
+        <div class="step"><b>03</b><strong>Автопроверки</strong><small>Реестры, стоп-факторы и скоринговая оценка.</small></div>
+        <div class="step"><b>04</b><strong>Рассмотрение</strong><small>Оператор проверяет материалы и рекомендации.</small></div>
+        <div class="step"><b>05</b><strong>Решение</strong><small>Одобрение или отказ; основание сохраняется в аудите.</small></div>
+      </div>
+      <div class="split">
+        <div class="list-card"><h3>Ключевые принципы</h3><ul><li>Статус заявки отделён от результата скоринга.</li><li>Ошибка интеграции не считается отказом.</li><li>Повторные операции защищены от дублирования.</li><li>История статусов, решений и интеграций доступна для аудита.</li></ul></div>
+        <div class="list-card"><h3>Передача в смежные модули</h3><ul><li>После одобрения передаются сведения о проекте в Модуль 2.</li><li>Финансовые условия и сведения соглашения доступны Модулю 3.</li><li>Сбой доставки не должен отменять уже сохранённое решение.</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="m2" id="module2">
+    <div class="wrap">
+      <div class="section-head"><div class="section-no">Модуль / 02</div><div><span class="tag">Исполнение проекта</span><h2>Мониторинг исполнения проектов промышленной модернизации</h2><p>Модуль превращает утверждённый план в наблюдаемую картину исполнения: что запланировано, что происходит фактически и где требуется управленческое действие.</p></div></div>
+      <div class="grid">
+        <article class="card"><div class="icon">↻</div><h3>Сбор фактических данных</h3><p>Ежедневная синхронизация с внешними источниками, сопоставление данных и фиксация результата каждого обмена.</p></article>
+        <article class="card"><div class="icon">Δ</div><h3>Контроль отклонений</h3><p>Сравнение фактических сроков этапов, расходов и KPI с утверждённым планом и его версией.</p></article>
+        <article class="card"><div class="icon">✓</div><h3>Корректирующие действия</h3><p>Назначение ответственного, фиксация пояснения, контроль устранения и повторная проверка отклонения.</p></article>
+      </div>
+      <div class="split">
+        <div class="list-card"><h3>Основные функции</h3><ul><li>Единый внутренний идентификатор проекта и привязка внешних ID.</li><li>Версионирование базового плана, который не перезаписывается фактом.</li><li>Расчёт отклонений по срокам, бюджету и KPI.</li><li>Предложение нового статуса с подтверждением сотрудником ведомства.</li><li>История синхронизаций, решений и действий пользователей.</li></ul></div>
+        <div class="list-card"><h3>Надёжность и контроль</h3><ul><li>Повторные попытки при временных сбоях источника.</li><li>Предупреждение об устаревших данных.</li><li>Защита от повторной обработки одного и того же события.</li><li>Разграничение прав по ролям и области доступа.</li><li>Нулевой знаменатель и граничные значения обрабатываются явно.</li></ul></div>
+      </div>
+      <div class="note">Граница ответственности: Модуль 2 контролирует исполнение проекта, но не утверждает исходную заявку и не проводит платежи. Фактические значения поступают из источников, а управленческие решения фиксируются отдельно.</div>
+      <h3>Цикл мониторинга</h3>
+      <div class="steps">
+        <div class="step"><b>01</b><strong>План</strong><small>Утверждённые этапы, бюджет и KPI.</small></div>
+        <div class="step"><b>02</b><strong>Синхронизация</strong><small>Загрузка фактов из внешних систем.</small></div>
+        <div class="step"><b>03</b><strong>Сравнение</strong><small>Расчёт отклонений и проверка порогов.</small></div>
+        <div class="step"><b>04</b><strong>Действие</strong><small>Ответственный, пояснение и план устранения.</small></div>
+        <div class="step"><b>05</b><strong>Контроль</strong><small>Повторная проверка и аудит результата.</small></div>
+      </div>
+      <p class="small">Комплект проектных артефактов Модуля 2: бизнес-требования и правила, системные требования, use cases, диаграммы процесса и последовательности, OpenAPI и mock-данные, ERD/SQL, тест-кейсы и матрица трассируемости.</p>
+    </div>
+  </section>
+
+  <section class="m3" id="module3">
+    <div class="wrap">
+      <div class="section-head"><div class="section-no">Модуль / 03</div><div><span class="tag">Отчётность и проверка</span><h2>Подсистема сбора и проверки отчётности (ПСПО)</h2><p>ПСПО автоматизирует формирование, подачу, предварительную проверку и согласование отчётности предприятий о целевом использовании поддержки и достижении KPI.</p></div></div>
+      <div class="metric-grid">
+        <div class="metric"><strong class="accent-violet">≤ 1 недели</strong><span>Цель среднего срока подготовки и подачи отчётности к 31.01.2027</span></div>
+        <div class="metric"><strong class="accent-violet">100%</strong><span>Цель предварительной автоматической проверки пакетов документов</span></div>
+        <div class="metric"><strong class="accent-violet">≤ 3 с</strong><span>Требуемое время системной валидации после отправки</span></div>
+      </div>
+      <div class="note violet">Показатели и сроки приведены по техническому заданию ПСПО. Они являются целями проектирования, а не подтверждёнными результатами внедрения.</div>
+      <div class="grid">
+        <article class="card"><div class="icon">A</div><h3>Бухгалтер предприятия</h3><p>Заполняет отчётную форму, прикладывает первичные документы и подписывает пакет усиленной квалифицированной электронной подписью (УКЭП).</p></article>
+        <article class="card"><div class="icon">B</div><h3>ПСПО</h3><p>Проверяет полноту и форматы, валидирует подпись, регистрирует корректный пакет и передаёт его на рассмотрение.</p></article>
+        <article class="card"><div class="icon">C</div><h3>Инспектор ведомства</h3><p>Изучает отчёт, документы и результаты автоматических проверок KPI; утверждает отчёт либо возвращает его с комментариями.</p></article>
+      </div>
+      <h3 style="margin-top:32px">Целевой процесс подачи отчётности</h3>
+      <div class="steps">
+        <div class="step"><b>01</b><strong>Подготовка</strong><small>Форма отчёта и пакет первичных документов.</small></div>
+        <div class="step"><b>02</b><strong>Подписание</strong><small>Проверка УКЭП и срока действия сертификата.</small></div>
+        <div class="step"><b>03</b><strong>Автопроверка</strong><small>Полнота, форматы и соответствие требованиям соглашения.</small></div>
+        <div class="step"><b>04</b><strong>Рассмотрение</strong><small>Инспектор проверяет показатели и документы.</small></div>
+        <div class="step"><b>05</b><strong>Решение</strong><small>Утверждение либо возврат с замечаниями на доработку.</small></div>
+      </div>
+      <div class="split">
+        <div class="list-card"><h3>Статусы отчёта</h3><ul><li><b>Draft</b> — черновик отчёта.</li><li><b>Under auto-check</b> — выполняется автоматическая проверка.</li><li><b>Requires revision</b> — требуется исправление; доступна повторная подача.</li><li><b>Registered</b> — пакет прошёл предварительную проверку и зарегистрирован.</li><li><b>Approved</b> — отчёт утверждён инспектором.</li></ul></div>
+        <div class="list-card"><h3>Интеграции и ограничения</h3><ul><li>Криптографический модуль CryptoPro / российские стандарты ГОСТ для УКЭП.</li><li>Сервис нормативно-справочных данных и проверок по реестрам ФНС.</li><li>Защищённый электронный архив со сроком хранения не менее 5 лет.</li><li>Ролевая модель доступа, защищённая инфраструктура и неизменяемый аудит.</li><li>Целевая нагрузка — 500 одновременных пользователей; доступность 24/7/365.</li></ul></div>
+      </div>
+      <h3 style="margin-top:30px">REST API: основные операции</h3>
+      <div class="api-list">
+        <span class="api">GET /api/v1/reports</span>
+        <span class="api">POST /api/v1/reports</span>
+        <span class="api">POST /api/v1/reports/{id}/files</span>
+        <span class="api">POST /api/v1/reports/{id}/submit</span>
+        <span class="api">GET /api/v1/reports/{id}/status</span>
+        <span class="api">POST /api/v1/inspector/reports/{id}/review</span>
+      </div>
+      <div class="note violet">По техническому заданию отправка блокируется, если автоматическая проверка обнаружила ошибки. Для возврата на доработку предусмотрены редактирование и повторная подача. Формальные юридические и криптографические проверки требуют согласования с реальной инфраструктурой.</div>
+    </div>
+  </section>
+
+  <section id="quality">
+    <div class="wrap">
+      <div class="section-head"><div class="section-no">Сквозной результат</div><div><span class="tag">Качество и проверяемость</span><h2>Документация связывает бизнес-цель с реализацией</h2><p>Каждый модуль описывается как согласованный набор артефактов. Сквозной процесс позволяет проследить данные и решения от первичной заявки до контроля исполнения и отчётности.</p></div></div>
+      <div class="grid">
+        <article class="card"><div class="icon">R</div><h3>Требования и правила</h3><p>Бизнес-цели, границы, роли, бизнес-правила, функциональные и нефункциональные требования, критерии приёмки.</p></article>
+        <article class="card"><div class="icon">M</div><h3>Модели и контракты</h3><p>Процессы и последовательности, REST API/OpenAPI, ERD, SQL-схемы и примеры обмена.</p></article>
+        <article class="card"><div class="icon">T</div><h3>Тестирование и аудит</h3><p>Позитивные, негативные, граничные и интеграционные тесты; история статусов, ошибок и решений.</p></article>
+      </div>
+      <div class="note blue">Важно: это учебное проектное решение. Реальные подключения к внешним системам, правовые пороги, криптографические настройки, нагрузочные испытания и промышленная эксплуатация требуют отдельного подтверждения.</div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap footer-line"><div>ГИС «Господдержка» · системный анализ и проектирование</div><div>Единая презентационная страница · модули 1–3</div></div></footer>
+</body>
+</html>
